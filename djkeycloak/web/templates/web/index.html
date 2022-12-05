@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Django + Keycloak Demo</title>
+</head>
+<body>
+
+  <div>
+    {% if user.is_authenticated %}
+     <p>Current user: {{ request.user.email }}</p>
+     <p>User is: {{ request.user.first_name }}</p>
+     <form action="{% url 'oidc_logout' %}" method="post">
+         {% csrf_token %}
+         <input type="submit" value="Logout">
+     </form>
+     {% else %}
+     <a href="{% url 'oidc_authentication_init' %}">Login</a>
+     {% endif %}
+    </div>
+  
+</body>
+</html>
